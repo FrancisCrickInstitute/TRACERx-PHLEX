@@ -1,3 +1,6 @@
 [submodule "deep-imcyto"]
 	path = deep-imcyto
 	url = git@github.com:FrancisCrickInstitute/rubicon-deep-imcyto.git
+[submodule "Spatial-PHLEX"]
+	path = Spatial-PHLEX
+	url = git@github.com:FrancisCrickInstitute/rubicon-sppipeline.git
