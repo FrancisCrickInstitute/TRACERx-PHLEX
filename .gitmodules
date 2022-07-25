@@ -1,0 +1,3 @@
+[submodule "deep-imcyto"]
+	path = deep-imcyto
+	url = git@github.com:FrancisCrickInstitute/rubicon-deep-imcyto.git
