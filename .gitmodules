@@ -7,3 +7,6 @@
 [submodule "TRACERx-PHLEX"]
 	path = TRACERx-PHLEX
 	url = https://github.com/FrancisCrickInstitute/TRACERx-PHLEX.git
+[submodule "TYPEx"]
+	path = TYPEx
+	url = https://github.com/FrancisCrickInstitute/TYPEx.git
