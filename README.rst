@@ -11,7 +11,7 @@ It implements and automates the following integral steps for multiplexed imaging
 - performs a range of *spatial analyses* (Spatial-PHLEX)
 
 .. image:: docs/source/_files/images/figure1_zoom.png
-        :width: 400
+        :width: 600
         :alt: Alternative text
 
 These steps are implemented as individual modules that can be run independently or as an uninterrupted fully automated end-to-end workflow (Quick start).
