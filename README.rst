@@ -10,7 +10,7 @@ It implements and automates the following integral steps for multiplexed imaging
 - segments *tissue compartments* such as tumour and stroma (TYPEx)
 - performs a range of *spatial analyses* (Spatial-PHLEX)
 
-.. image:: _files/images/figure1_zoom.png
+.. image:: docs/source/_files/images/figure1_zoom.png
         :width: 400
         :alt: Alternative text
 
