@@ -5,6 +5,7 @@ TRACERx-PHLEX: One-stop pipeline for robust and comprehensive multiplexed imagin
 
 **TRACERx-PHLEX** is a user-friendly pipeline for an end-to-end analysis of multiplex imaging data.
 It implements and automates the following integral steps for multiplexed imaging analysis:
+
 - *segments nuclear and cell objects* (deep-imcyto)
 - automatically identifies and annotates *cell types and cell states* (TYPEx)
 - segments *tissue compartments* such as tumour and stroma (TYPEx)
