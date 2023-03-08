@@ -4,7 +4,7 @@ ml purge
 ml Nextflow/22.04.0
 ml Singularity/3.6.4
 # export cache directory for singularity
-export NXF_SINGULARITY_CACHEDIR='.singularity/cache'
+export NXF_SINGULARITY_CACHEDIR='Singularity_cache'
 
 release="PHLEX_test"
 
