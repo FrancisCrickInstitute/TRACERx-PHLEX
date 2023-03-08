@@ -39,6 +39,8 @@ nextflow run TRACERx-PHLEX/TYPEx/main.nf \
    -profile singularity \
    --wd "scratch" \
    -resume
+   
+   
 # Spatial-PHLEX
 nextflow run TRACERx-PHLEX/Spatial-PHLEX/main.nf \
    --sampleFile "$PWD/TRACERx-PHLEX/Spatial-PHLEX/data/sample_data.tracerx.txt"\
