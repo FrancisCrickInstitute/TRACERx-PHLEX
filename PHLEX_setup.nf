@@ -5,9 +5,9 @@ nextflow.enable.dsl=2
 params.path = '.'
 
 process download_test_data {
+    
     publishDir "${params.path}", mode: 'move'
 
-    input: val post
     output: file '*/*.tiff'
 
     """
@@ -19,6 +19,6 @@ process download_test_data {
 
 workflow {
 
-    download_test_data(post: 'test')
+    download_test_data()
 
 }
