@@ -3,6 +3,7 @@
 nextflow.enable.dsl=2
 
 params.path = '.'
+params.runScript = "$PWD/TRACERx-PHLEX/runPHLEX.sh"
 
 process download_test_data {
 
@@ -21,7 +22,9 @@ process download_weights {
     
     publishDir "${params.path}", mode: 'move'
 
-    output: file '*/*.tiff'
+    output: 
+        file '*/*.hdf5'
+        file '*/*.pkl'
 
     """
     wget https://zenodo.org/record/7665181/files/deep-imcyto_weights.zip
@@ -34,17 +37,19 @@ process moveRunScript{
     
         publishDir "${params.path}", mode: 'move'
 
-        input: file 'TRACERx-PHLEX/runPHLEX.sh'
+        input: path rs
         output: file 'runPHLEX.sh'
     
         """
-        echo "Moving runPHLEX.sh to ${params.path}"
+        echo "Moving ${rs} to ${params.path}"
         """
 }
 
 workflow {
 
+    println("Performing PHLEX setup.")
     download_test_data()
     download_weights()
-    moveRunScript()
+    moveRunScript(params.runScript)
+
 }
