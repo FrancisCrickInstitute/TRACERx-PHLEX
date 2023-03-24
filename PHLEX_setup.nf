@@ -35,7 +35,7 @@ process download_weights {
 
 process moveRunScript{
     
-        publishDir "${params.path}", mode: 'move'
+        publishDir "${params.path}", mode: 'copy'
 
         input: path rs
         output: file 'runPHLEX.sh'
