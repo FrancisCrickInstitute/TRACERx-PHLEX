@@ -1,8 +1,10 @@
 #!/bin/bash
+
 #LOAD MODULES
 ml purge
 ml Nextflow/22.04.0
 ml Singularity/3.6.4
+
 # export cache directory for singularity
 export NXF_SINGULARITY_CACHEDIR='Singularity_cache'
 
@@ -45,13 +47,13 @@ nextflow run TRACERx-PHLEX/TYPEx/main.nf \
 nextflow run TRACERx-PHLEX/Spatial-PHLEX/main.nf \
    --sampleFile "$PWD/TRACERx-PHLEX/Spatial-PHLEX/data/sample_data.tracerx.txt"\
    --objects "$PWD/results/TYPEx/$release/summary/*/cell_objects_${release}_p1.txt"\
-   --phenotyping_column ‘majorType’ \
-   --barrier_phenotyping_column ‘majorType’ \
+   --phenotyping_column "majorType" \
+   --barrier_phenotyping_column "majorType" \
    --outdir "$PWD/results" \
    --release $release \
-   --workflow_name ‘default’ \
-   --barrier_source_cell_type ‘CD8 T cells’\
-   --barrier_target_cell_type ‘Epithelial cells’\
-   --barrier_cell_type ‘aSMA+ cells’\
+   --workflow_name "default" \
+   --barrier_source_cell_type "CD8 T cells"\
+   --barrier_target_cell_type "Epithelial cells"\
+   --barrier_cell_type "aSMA+ cells"\
    -w "scratch" \
    -resume
