@@ -1,0 +1,21 @@
+Spatial-PHLEX param, Definition, Input options,  Workflow, optional?
+release                   ,Release directory. Identifier for the data analysis run.,e.g. '2022-08-23',All
+objects_delimiter         ,Character delimiting the objects dataframe.,e.g.  '\t',All
+metadata                  ,Path to the metadata file containing image-level metadata about images to be analysed.,e.g.  '/path/to/metadata.txt',"default, spatial_clustering"
+metadata_delimiter        ,Delimiter of the metadata file.,e.g. '\t',"default, spatial_clustering"
+objects                   ,Path to the cell objects dataframe.,e.g. '/path/to/objects.csv',All
+phenotyping_level         ,The column name in the objects dataframe defining the phenotypes of the cells.,e.g. 'cellType'; 'Ki-67+ve',"default, spatial_clustering"
+graph_type                ,The method of graph construction from cell positional data.,"'nearest_neighbour','neighbourhood','spatial_neighbours'","default, graph_barrier"
+neighborhood_input        ,globbable path to csv files containing neighbouRhood output produce by CellProfiler module., e.g. '/path/to/results/segmentation/*/*/neighbourhood.csv',graph_barrier
+neighbourhood_module_no   ,Module number of the neighbouRhood proces sin the CellProfiler pipeline, e.g. 865
+barrier_source_cell_type  ,The source cell type to compute barrier scores for.,CD8 T cells,"default, graph_barrier"
+barrier_target_cell_type  ,The target cell type to compute barrier scores for.,Epithelial cells_tumour,"default, graph_barrier"
+barrier_cell_type         ,The type of cell forming the barrier in the barrier scoring calculation.,Myofibroblasts,"default, graph_barrier"
+n_neighbours              ,Number of nearest neighbours for nearest_neighbour graph construction.,10,"default, graph_barrier"
+overwrite                 ,"Overwrite results published to the results directory, if they already exist.",true,All
+dev                       ,Development mode; sample a subset of input images.,"true, false"
+number_of_inputs          ,Number of images to process the data for in development mode.,2
+outdir                    ,Root output directory where results will be created., ../../results
+publish_dir_mode          ,Way Nextflow generates output in the publish directory.,default: 'copy'
+workflow_name             ,Spatial PHLEX workflow to run on the data.,"Options: 'default','spatial_clustering', 'graph_barrier'"
+barrier_phenotyping_level ,Column name in the objects table used to derive cell types for barrier scoring.,e.g. cellType
