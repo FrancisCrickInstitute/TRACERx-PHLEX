@@ -42,7 +42,7 @@ Running TYPEx on input generated with deep-imcyto
         --params_config "$PWD/TRACERx-PHLEX/TYPEx/data/typing_params.json" \
         --annotation_config "$PWD/TRACERx-PHLEX/TYPEx/data/cell_type_annotation.p1.json" \
         --tissue_seg_model "$PWD/TRACERx-PHLEX/TYPEx/models/tumour_stroma_classifier.ilp" \
-		  --color_config $PWD/TRACERx-PHLEX/TYPEx/data/celltype_colors.json \
+	--color_config $PWD/TRACERx-PHLEX/TYPEx/data/celltype_colors.json \
         --deep_imcyto true --mccs true \
         -profile singularity \
         -resume
