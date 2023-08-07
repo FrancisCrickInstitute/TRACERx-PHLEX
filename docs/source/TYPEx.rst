@@ -35,7 +35,7 @@ Running on input generated with deep-imcyto
    nextflow run TRACERx-PHLEX/TYPEx/main.nf \
         -c $PWD/TRACERx-PHLEX/TYPEx/conf/testdata.config \
         --input_dir $PWD/results/deep-imcyto/$release/ \
-        --sample_file $PWD/TRACERx-PHLEX/TYPEx/data/sample_data.tracerx.txt \
+        --sample_file $PWD/TRACERx-PHLEX/TYPEx/data/sample_file.tracerx.txt \
         --release $release \
         --output_dir "$PWD/results/TYPEx/$release/" \
         --params_config "$PWD/TRACERx-PHLEX/TYPEx/data/typing_params.json" \
