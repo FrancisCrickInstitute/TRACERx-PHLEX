@@ -43,7 +43,6 @@ Running on input generated with deep-imcyto
         --annotation_config "$PWD/TRACERx-PHLEX/TYPEx/data/cell_type_annotation.p1.json" \
         --deep_imcyto true --mccs true \
         -profile singularity \
-        --wd "scratch" \
         -resume
 
 Running indpendently of deep-imcyto
@@ -63,7 +62,6 @@ Running indpendently of deep-imcyto
     --params_config "$PWD/TYPEx/data/typing_params.json" \
     --annotation_config "$PWD/TYPEx/data/cell_type_annotation.p1.json" \
     -profile singularity \
-    --wd "scratch" \
     -resume
 
 
