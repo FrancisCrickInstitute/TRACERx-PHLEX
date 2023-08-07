@@ -28,7 +28,7 @@ Usage
         
         git clone git@github.com:FrancisCrickInstitute/TYPEx.git
 
-Running on input generated with deep-imcyto
+Running TYPEx on input generated with deep-imcyto
 --------------
 
 .. code-block:: bash
@@ -67,7 +67,7 @@ Running TYPEx with user-provided cell objects tables (indpendently of deep-imcyt
     -profile singularity \
     -resume
 
-Running locally without high-perfomance computing server
+Running TYPEx locally without high-perfomance computing server
 
 .. code-block:: bash
 
