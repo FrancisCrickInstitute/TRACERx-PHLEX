@@ -34,7 +34,7 @@ Running on input generated with deep-imcyto
 .. code-block:: bash
 
    nextflow run TRACERx-PHLEX/TYPEx/main.nf \
-        -c $PWD/TRACERx-PHLEX/TYPEx/conf/testdata.config \
+        -c $PWD/TRACERx-PHLEX/TYPEx/test.config \
         --input_dir $PWD/results/deep-imcyto/$release/ \
         --sample_file $PWD/TRACERx-PHLEX/TYPEx/data/sample_file.tracerx.txt \
         --release $release \
@@ -54,7 +54,7 @@ Running indpendently of deep-imcyto
 
    release=TYPEx_test
    nextflow run TYPEx/main.nf \
-   -c $PWD/TYPEx/conf/testdata.config \
+   -c $PWD/TYPEx/test.config \
     -c TYPEx/testdata.config \
     --input_dir $PWD/results/ \
     --release $release \
