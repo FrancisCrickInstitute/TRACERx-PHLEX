@@ -47,7 +47,7 @@ Running on input generated with deep-imcyto
         -profile singularity \
         -resume
 
-Running indpendently of deep-imcyto
+Running TYPEx with user-provided cell objects tables (indpendently of deep-imcyto)
 --------------
 
 .. code-block:: bash
