@@ -32,6 +32,7 @@ Running on input generated with deep-imcyto
 --------------
 
 .. code-block:: bash
+
    nextflow run TRACERx-PHLEX/TYPEx/main.nf \
         -c $PWD/TRACERx-PHLEX/TYPEx/conf/testdata.config \
         --input_dir $PWD/results/deep-imcyto/$release/ \
@@ -53,14 +54,14 @@ Running indpendently of deep-imcyto
    release=TYPEx_test
    nextflow run TYPEx/main.nf \
    -c $PWD/TYPEx/conf/testdata.config \
-    -c TYPEx/nextflow.config \
+    -c TYPEx/testdata.config \
     --input_dir $PWD/results/ \
     --release $release \
     --input_table $PWD/TYPEx/data/cell_objects.tracerx.txt \
-    --sample_file $PWD/TRACERx-PHLEX/TYPEx/data/sample_data.tracerx.txt \
+    --sample_file $PWD/TYPEx/data/sample_file.tracerx.txt \
     --output_dir "$PWD/results/TYPEx/$release/" \
-    --params_config "$PWD/TRACERx-PHLEX/TYPEx/data/typing_params.json" \
-    --annotation_config "$PWD/TRACERx-PHLEX/TYPEx/data/cell_type_annotation.p1.json" \
+    --params_config "$PWD/TYPEx/data/typing_params.json" \
+    --annotation_config "$PWD/TYPEx/data/cell_type_annotation.p1.json" \
     -profile singularity \
     --wd "scratch" \
     -resume
@@ -131,9 +132,9 @@ Input table
 
 The input matrix has values that summarise the intensity of a protein per cell object, such as mean intensity, independently of the imaging modality or antibody tagging technique.
 
-================= ============ ===== ===== ============== ============ ============ ============
-  Cell Object ID    Image ID     X     Y     Area [opt].    Marker 1     ...          Marker N  
-================= ============ ===== ===== ============== ============ ============ ============
+=============== =========== ===== ===== ============== ============ ============ ============
+  ObjectNumber   imagename    X     Y     Area [opt].   <Marker 1>       ...      <Marker N>  
+=============== =========== ===== ===== ============== ============ ============ ============
 
 .. _Typing parameters config:
 Typing parameters config
