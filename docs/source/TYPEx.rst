@@ -173,9 +173,9 @@ Sample annotation table
 -----------------------------
 Provide the sample annotation table in the following format: 
 
-============ ================== ======= ===================
-  Image ID     Batch effect 1     ...     Batch effect N  
-============ ================== ======= ===================
+============ =========================== ================== ======= =================== =================
+ imagename     <experimental condition>   <Batch effect 1>    ...    <Batch effect N>  		use_image
+============ =========================== ================== ======= =================== =================
 
 .. _Outputs:
 Outputs
@@ -191,6 +191,12 @@ These include densities of identified cell phenotypes (cell_density_*.txt), a ca
         ├── phenotypes.*.txt          
         ├── summary_*.cell_stats.txt
         ├── categs_summary_*.cell_stats.txt
+	├── mapps
+	├── intensity_plots
+	├── overlays
+
+
+
        
 Troubleshooting
 =============
