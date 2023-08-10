@@ -6,7 +6,6 @@ Deep cell phenotyping
 =============
 *No more hunt-and-pecking! Detecting single-cell protein expression and cell phenotyping with TYPEx*
 
-
 .. |workflow| image:: _files/images/typing4.png
         :height: 200
         :alt: TYPEx workflow
@@ -39,7 +38,7 @@ Running TYPEx on input generated with deep-imcyto
         --sample_file $PWD/TRACERx-PHLEX/TYPEx/data/sample_file.tracerx.txt \
         --release $release \
         --output_dir "$PWD/results/TYPEx/$release/" \
-        --params_config "$PWD/TRACERx-PHLEX/TYPEx/data/typing_params.json" \
+        --params_config "$PWD/TRACERx-PHLEX/TYPEx/conf/typing_params.json" \
         --annotation_config "$PWD/TRACERx-PHLEX/TYPEx/data/cell_type_annotation.p1.json" \
         --tissue_seg_model "$PWD/TRACERx-PHLEX/TYPEx/models/tumour_stroma_classifier.ilp" \
 	--color_config $PWD/TRACERx-PHLEX/TYPEx/data/celltype_colors.json \
@@ -191,10 +190,9 @@ These include densities of identified cell phenotypes (cell_density_*.txt), a ca
         ├── phenotypes.*.txt          
         ├── summary_*.cell_stats.txt
         ├── categs_summary_*.cell_stats.txt
-	├── mapps
+	├── maps
 	├── intensity_plots
 	├── overlays
-
 
 
        
