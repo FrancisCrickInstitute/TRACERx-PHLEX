@@ -198,5 +198,139 @@ These include densities of identified cell phenotypes (cell_density_*.txt), a ca
        
 Troubleshooting
 =============
+1. **Pipeline has finished after the formatting input files (PREPROCESS) and tissue segmentation (TISSEG) processes without starting processes related to typing.**
 
-Several visualisation plots are output for each step in the workflow and can be used to make sure each step has gone as expected.
+Check whether the input cell-by-marker tables exist and are correctly specified. When using deep-imcyto as input, make sure that the deep-imcyto release matches the release specified for TYPEx.
+
+2. **Process terminated with an error exit status (137)**
+
+The allocated CPUs or memory are not sufficient. The computational requirements are allocated in the config file specified with the ``-c`` parameter in the script for running TYPEx, for example, ``nextflow.config`` indicated with
+
+    .. code-block:: bash
+       :emphasize-lines: 2
+
+	nextflow run TYPEx/main.nf \
+		-c <path>/nextflow.config
+
+Open this file and adjust the maximum number of CPUs and memory in GB. By default, in the ``nextlfow.config`` file, these values are:
+
+    .. code-block:: json-object
+	
+	max_cpus = 32
+	max_memory = 250
+
+The TYPEx repository includes two additional config files that can be used for smaller datasets and testing purposes: ``test.config`` and ``conf/testdata.config``.
+	
+
+3. **ERROR: Sample annotation file does not exist.**
+
+Verify that the file specified with the argument ``–sample_file`` in the script for running TYPEx exists.
+
+
+    .. code-block:: bash
+       :emphasize-lines: 2
+
+        nextflow run TYPEx/main.nf \
+ 		--sample_file <path>/sample_file.txt
+
+4. **ERROR: The variables for batch effect correction specified in typing_params.json do not exist.**
+
+Batch effect correction can be specified in the config file ``typing_params.json``, by including the names of the columns in the sample annotation file. For example, TYPEx will account for batch effects by TMA ID and staining batch defined in ``typing_params.json`` under
+
+  .. code-block:: json-object
+	
+	"batch_effects":["TMA",  "antibody_batch"],
+
+``TMA`` and ``antibody_batch`` need to be added as columns in the sample annotation file indicated with the argument ``–sample_file``. If the column names are already added in the file, make sure that the sample annotation file is in a tab-separated format.
+
+5. **Reading cell-type annotation config /path/to/file/cell_type_annotation.json. Error in parse_con(txt, bigint_as_char) : parse error: premature EOF**
+
+This error is linked to parsing a file in json format, most frequenty the ``cell_type_annotation.json`` file with cell lineage and subtype definitions. Make sure that every open curly bracket ``{`` is matched by a closing curly bracket ``}``. Online json format validators may also be useful.
+Note, the cell type annotation file is specified in the script for running TYPEx with
+
+.. code-block:: json-object
+	
+	--annotation_config "$PWD/config/cell_type_annotation.json" \
+
+6. **Reading typing config /path/to/file/typing_params.json. Command error: Error: lexical error: invalid char in json text.**
+
+The config file ``typing_params.json`` does not exist. Make sure that the path is correct.
+
+7. **Error in parse_con(txt, bigint_as_char): parse error: after key and value, inside map, I expect ',' or '}'. Calls: source ... <Anonymous> -> parse_and_simplify -> parseJSON -> parse_con**
+
+This error is linked to parsing a file in json format, most frequenty the ``cell_type_annotation.json`` file with cell lineage and subtype definitions. Check that opening square brackets are matched by a closing square bracket. Make sure that there is a comma followed by another element in the list, or a closing curly bracket to close the list. Online json format validators may also be useful.
+
+8. **ERROR: Marker list <major_markers> not found.**
+
+The markers specific for cell lineages and cell subtypes need to be defined as lists in the input config file cell_annotation.json file. The default names are major_markers for the major cell lineages and subtype_markers for the cell subtypes. Make sure that these names exist in the input file or specify the names of these lists by adding the following lines in the script for running TYPEx:
+
+ .. code-block:: bash
+
+	--major_markers 'users_major_markers’ \
+	--subtype_markers 'users_subtype_markers' \
+
+9. **ERROR: Cell type-specific markers not provided for positivity calling/**
+
+The markers used for positivity calling are not found specified in ``typing_params.json``. By default, three markers, CD3, CD4, and CD8a are specified as follows:
+	
+.. code-block:: json-object
+       :emphasize-lines: 3
+
+	// Markers used for detecting expression
+	  "threshold":{
+	      "markers":["CD3", "CD4", "CD8a"],
+	      "high_frequency":["CD3_CD4", "CD3_CD8a"],
+	      "variable":["CD4"],
+	      "low_frequency":["CD3"],
+	      "rare":["CD8a", "CD4_CD8a", "CD3_CD4_CD8a"]
+	},
+
+10. **ERROR: The marker names defined for thresholding in typing_params.json are not in the input cell-by-marker matrix.**
+
+At least one of the markers used for positivity calling and specified in ``typing_params.json`` could not be found among the markers in the cell-by-marker intensity matrix. Make sure that the markers specified as below by default, CD3, CD4, and CD8a have been included in the antibody panel and are correctly specified.
+
+.. code-block:: json-object
+   :emphasize-lines: 3
+
+// Markers used for detecting expression
+	// Markers used for detecting expression
+	  "threshold":{
+	      "markers":["CD3", "CD4", "CD8a"],
+	      "high_frequency":["CD3_CD4", "CD3_CD8a"],
+	      "variable":["CD4"],
+	      "low_frequency":["CD3"],
+	      "rare":["CD8a", "CD4_CD8a", "CD3_CD4_CD8a"]
+     },
+
+
+11. **ERROR: Verify that the marker combinations in typing_params.json are valid.**
+
+At least one of the marker marker combinations used for positivity calling and specified in ``typing_params.json`` could not be found. Make sure that the marker combinations are a valid combination of the three markers, in the same order as in the ``markers`` list. For example, in the default settings for CD3, CD4, and CD8a, shown below, CD3_CD4 and CD4_CD8a are valid combinations of existing markers in the order the markers are specified, CD3, CD4 and CD8a. However, CD4_CD3 is not a valid combination, because it is not in the order they are specified. CD4_CD8 is also not a valid combination, because CD8a but not CD8 is present in the panel of markers.
+
+.. code-block:: json-object
+   :emphasize-lines: 4, 5, 6, 7
+
+	// Markers used for detecting expression
+	  "threshold":{
+	      "markers":["CD3", "CD4", "CD8a"],
+	      "high_frequency":["CD3_CD4", "CD3_CD8a"],
+	      "variable":["CD4"],
+	      "low_frequency":["CD3"],
+	      "rare":["CD8a", "CD4_CD8a", "CD3_CD4_CD8a"]
+     },
+
+12. **"ERROR: Please make sure that both models have run."**
+
+This error occurs when the probabilistic models have not been completed, likely because the processes have been cached from a previous run. Remove the cached directory ‘work’ and restart the script for running TYPEx. 
+
+13. **ERROR: Intensity values missing for <number of> cells. Cannot create a model with NAs for the following cell types.**
+
+This error occurs when TYPEx has successfully run, and it is restarted with modified definitions for the major cell lineages in ``cell_type_annotation.json``. The cell subtype definitions can be modified, and TYPEx can be rerun but changing the major cell annotations is not recommended. Indicate a new release to run TYPEx with modified definitions for major cell lineages.
+
+14. **Cell-by-marker matrix is empty.**
+
+If using deep-imcyto as input, make sure that the metal-Ab namings is consistent across all mcd files used as input to deep-imcyto. Unless the metal-Ab names are consistent acorss the mcd files, TYPEx will consider these as different marker names. There will be no markers with definite values (non-NAs) for all cell objects.
+
+15. All intensity values need to be non-negative values.
+
+16. Avoid using underscore or special characters for the marker names, except for ``-``.
