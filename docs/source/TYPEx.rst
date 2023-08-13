@@ -161,11 +161,13 @@ Typing parameters config
 :bash:`typing_params.json` contains the settings for clustering approaches to be used, normalisation approaches, and filtering criteria.
 
 Key parameters that are often of interest are:
-* magnitude 
-As CellAssign was developed for single-cell sequencing read count data, the input protein intensity matrix should be rescaled to a range of 0 - 10^6 using the input parameter magnitude. 
 
 * batch_effects
 CellAssign also accounts for batch effects, which can be considered if provided in a sample-annotation table and specified as input parameters to TYPEx for batch correction.
+
+* magnitude 
+By default, magnitude is set to 10. Set magnitude to 10^6 when using deep-imcyto in MCCS mode. 
+
 
 .. _Sample annotation table:
 Sample annotation table
