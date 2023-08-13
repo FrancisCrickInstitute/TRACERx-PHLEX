@@ -132,7 +132,7 @@ The following parameters refer to the typing approach:
 - :bash:`subtype_method` the clustering approach to be used in the last stratification step [default: FastPG]
 - :bash:`major_markers` the label of the major cell type definitions in :bash:`cell_type_annotation.json` [default: major_markers]
 - :bash:`subtype_markers` the label of the cell subtype definitions in :bash:`cell_type_annotation.json` [default: subtype_markers]
-- :bash:`mostFreqCellType` the most frequent cell type in the cohort if known in :bash:`cell_type_annotation.json` [default: None]
+- :bash:`exclude_cell_lineage` the most frequent cell type in the cohort if known in :bash:`cell_type_annotation.json` [default: None]
 
     .. note:: The most frequent cell type is used to build the reference model by excluding this cell type. When it is not provided, the complete model wil be built, followed by the reference model. If provided, both will be executed in parallel. Parallel execution can make a difference in time, as these are the most time-consuming processes.
 
