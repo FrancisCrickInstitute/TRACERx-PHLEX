@@ -292,7 +292,6 @@ At least one of the markers used for positivity calling and specified in ``typin
 .. code-block:: json-object
    :emphasize-lines: 3
 
-// Markers used for detecting expression
 	// Markers used for detecting expression
 	  "threshold":{
 	      "markers":["CD3", "CD4", "CD8a"],
@@ -308,7 +307,7 @@ At least one of the markers used for positivity calling and specified in ``typin
 At least one of the marker marker combinations used for positivity calling and specified in ``typing_params.json`` could not be found. Make sure that the marker combinations are a valid combination of the three markers, in the same order as in the ``markers`` list. For example, in the default settings for CD3, CD4, and CD8a, shown below, CD3_CD4 and CD4_CD8a are valid combinations of existing markers in the order the markers are specified, CD3, CD4 and CD8a. However, CD4_CD3 is not a valid combination, because it is not in the order they are specified. CD4_CD8 is also not a valid combination, because CD8a but not CD8 is present in the panel of markers.
 
 .. code-block:: json-object
-   :emphasize-lines: 4, 5, 6, 7
+   :emphasize-lines: 4,5,6,7
 
 	// Markers used for detecting expression
 	  "threshold":{
@@ -331,6 +330,6 @@ This error occurs when TYPEx has successfully run, and it is restarted with modi
 
 If using deep-imcyto as input, make sure that the metal-Ab namings is consistent across all mcd files used as input to deep-imcyto. Unless the metal-Ab names are consistent acorss the mcd files, TYPEx will consider these as different marker names. There will be no markers with definite values (non-NAs) for all cell objects.
 
-15. All intensity values need to be non-negative values.
+15. **Pipeline has copmleted after the formatting input files (PREPROCESS) without starting processes related to tissue segmentation (TISSEG) processes and typing.**
 
-16. Avoid using underscore or special characters for the marker names, except for ``-``.
+Review the config file tissue_segmentation.json for any syntax errors or use an online json validator.
