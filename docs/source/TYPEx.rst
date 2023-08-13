@@ -332,4 +332,4 @@ If using deep-imcyto as input, make sure that the metal-Ab namings is consistent
 
 15. **Pipeline has copmleted after the formatting input files (PREPROCESS) without starting processes related to tissue segmentation (TISSEG) processes and typing.**
 
-Review the config file tissue_segmentation.json for any syntax errors or use an online json validator.
+Review the config file ``tissue_segmentation.json`` for any syntax errors or use an online json validator.
