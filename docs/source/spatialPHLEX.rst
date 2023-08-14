@@ -49,15 +49,23 @@ Example usage
 
     ## Spatial-PHLEX
     nextflow run ./main.nf \
-         --metadata <path/to/metadata>\
-         --metadata_delimiter '\t'\
-         --objects '/path/to/cellobjects.csv'\
-         --objects_delimiter '\t'\
-         --phenotyping_column 'majorType' \
-         --graph_type 'nearest_neighbour' \
-         --outdir '../../results' \
-         --release 'PHLEX_test' \
-         --workflow_name 'clustered_barrier' \
+        --objects "./data/cell_objects.csv"\
+        --objects_delimiter ","\
+        --image_id_col "Image_ID"\
+        --phenotyping_column "Phenotype"\
+        --phenotype_to_cluster "Epithelial cells"\
+        --x_coord_col "centerX"\
+        --y_coord_col "centerY"\
+        --barrier_phenotyping_column "Phenotype" \
+        --outdir "../results" \
+        --release "PHLEX_example" \
+        --workflow_name "clustered_barrier" \
+        --barrier_source_cell_type "CD8 T cells"\
+        --barrier_target_cell_type "Epithelial cells"\
+        --barrier_cell_type "aSMA+ Fibroblasts"\
+        --n_neighbours 5\
+        -w "./scratch"\
+        -resume
 
 Input Files
 ==================
@@ -67,7 +75,7 @@ Required Inputs
 - `cell_objects.csv`
     - A plaintext, delimited file containing single cell-level coordinate data for a set of images, plus their phenotypic identities.
 - `metadata.csv`
-    - A plaintext, delimited file containing metadata information about the images in `cell_objects.csv`. To run the pipeline this file must contain, for each image, an image identifier (`'imagename'`), and the width and height in pixels for every image as columns with the header `'image_width'` and `'image_height'`.
+    - Optional. A plaintext, delimited file containing metadata information about the images in `cell_objects.csv`. To run the pipeline this file must contain, for each image, an image identifier (e.g. `'imagename'` specified with the flag `--image_id_col`), and the width and height in pixels for every image as columns with the header `'image_width'` and `'image_height'`. If this file is not provided, the pipeline will attempt to infer approximate image dimensions from the maximum x,y cell coordinates for each image from the `cell_objects.csv` file.
 
 .. |spatial_phlex_input| figure:: _files/images/spatial_phlex_input.png
         :width: 300
@@ -79,7 +87,17 @@ Required Inputs
 
 Outputs
 ================
-- Cell type specific spatial clusters
+Cell type specific spatial clusters
+-----------------------------------
+.. |spatial_clustering| figure:: _files/images/spatial_cluster_plot.png
+        :width: 800
+        :alt: Example spatial cluster plot produced with Spatial-PHLEX.
+
+        Example spatial cluster plot produced with Spatial-PHLEX.
+
+Intracluster densities
+-----------------------------------
+
 - Barrier scores
 
 Output from Spatial-PHLEX has the following directory structure.
@@ -91,6 +109,7 @@ Output from Spatial-PHLEX has the following directory structure.
     │   ├── aggregated_barrier_scoring
     │   └── raw_barrier_scoring
     └── spatial_clustering
+    └── pipeline_info
 
 .. note::
 
@@ -145,9 +164,9 @@ Spatial PHLEX parameters are defined in the nextflow.config file in the Spatial 
     | publish_dir_mode            | Way Nextflow generates output in the publish directory.                                      | default: 'copy'                                              |
     +-----------------------------+----------------------------------------------------------------------------------------------+--------------------------------------------------------------+
     | release                     | Release directory. Identifier for the data analysis run.                                     | e.g. '2022-08-23'                                            |
-    +-----------------------------+----------------------------------------------------------------------------------------------+--------------------------------------------------------------+
-    | workflow_name               | Spatial PHLEX workflow to run on the data.                                                   | Options: 'default','spatial_clustering', 'graph_barrier'     |
-    +-----------------------------+----------------------------------------------------------------------------------------------+--------------------------------------------------------------+
+    +-----------------------------+----------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+
+    | workflow_name               | Spatial PHLEX workflow to run on the data.                                                   | Options: 'clustered_barrier', 'default','spatial_clustering', 'graph_barrier'     |
+    +-----------------------------+----------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------+
 
 
 Troubleshooting
