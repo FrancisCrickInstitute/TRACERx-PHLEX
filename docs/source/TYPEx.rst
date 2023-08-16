@@ -178,7 +178,7 @@ Provide the sample annotation table in the following format:
  imagename     <experimental condition>   <Batch effect 1>    ...    <Batch effect N>      use_image
 ============ =========================== ================== ======= =================== =================
 
-.. _Outputs:
+.. _Outputs, QC and interpretation:
 Outputs
 =============
 TYPEx outputs summary tables that can be readily interrogated for biological questions. 
@@ -196,7 +196,7 @@ These include densities of identified cell phenotypes (cell_density_*.txt), a ca
 	├── intensity_plots
 	├── overlays
 
-
+.. _Guide: Customising cell-type definitions
        
 Troubleshooting
 =============
@@ -335,3 +335,6 @@ If using deep-imcyto as input, make sure that the metal-Ab namings is consistent
 15. **Pipeline has copmleted after the formatting input files (PREPROCESS) without starting processes related to tissue segmentation (TISSEG) processes and typing.**
 
 Review the config file ``tissue_segmentation.json`` for any syntax errors or use an online json validator.
+
+Q&A
+----
