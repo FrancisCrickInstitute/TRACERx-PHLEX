@@ -299,6 +299,14 @@ The first column is the name of the isotope channel. This should be the same as 
     | 193Ir  | 1          | 0          | 1       | 0         | 0            |
     +--------+------------+------------+---------+-----------+--------------+
 
+Autogenerate the metadata file (experimental)
+---------------------------------------------
+deep-imcyto provides an inbuilt method to automatically generate the metadata file for a given input image. This process relies on the marker channels of the input IMC image having channel names that are separated from isotope tags by an underscore in the `.mcd` or `.tiff` file metadata, for example: `150Nd_PDL1`, `164Dy_PanCK` etc. This process option is experimental and may not work for all IMC datasets. 
+
+To use this method, set the flag :bash:`--autogenerate_metadata true` in the deep-imcyto run command. The script will then attempt to autogenerate the metadata file for the input images. This can be useful if there have been changes to the antibody panel during the scanning of an experimental cohort (e.g. if a marker was changed for an alternative due to poor staining), whcih would otherwise require the cohort to be processed separetly with two or more distinct metadata files. If the script is unable to autogenerate the metadata file, it will exit with an error message and the user will need to manually specify the metadata file. 
+
+Using the autogenerate option may increased your sample processing times, particularly for `.mcd` input files as a large amount of data is read from the `.mcd` file twice, first in order to generate the metadata file, then to process the file's contents with the metadata input. If this is a concern, it is recommended to generate the metadata file manually and specify it with the :bash:`--metadata` flag.
+
 Outputs
 ==================
 
@@ -565,8 +573,23 @@ A simplified overview of the key steps to implement in an MCCS procedure is incl
 
 
 
-.. Troubleshooting
-.. ===============
+Troubleshooting 
+===============
+
+Nuclear segmentation process fails
+----------------------------------
+Deep-imcyto may occasionally fail to run due to the quality of the input images. For instance, if nuclear staining quality in the Iridium staining channels (or other nuclear marker) is extremely poor then the pipeline may detect zero nuclei in the input images. If this does occur deep-imcyto's raw channel output, preprocessed nuclei, and pseudo-H&E images can then be inspected for poor nuclear signal, which may be due to poor sample quality, necrosis or poor tissue preservation, for instance. In this case, the user may wish to consider re-running the pipeline with a different set of input images, or with a different set of nuclear segmentation channels specified in the metadata file.
+
+Input file paths are not found
+-----------------------------------------
+This may be caused by several issues:
+1. The input file path is incorrectly specified in the deep-imcyto run command. Check all input file paths are correct.
+2. If input file paths are correct for your system then it is possible that deep-imcyto is not able to access the input files due to the file permissions. Check that the user running the deep-imcyto pipeline has read access to the input files.
+3. If file paths are correct, and permissions are correct, then deep-imcyto may not be mounting the input file paths correctly in the deep-imcyto Singularity container. deep-imcyto tries to mount filepaths automatically, but occasionally this may fail. In this case the ``--singularity_bind_path`` parameter can be specified manually in the deep-imcyto run command or ``nextflow.config`` file. Multiple bind paths may be specified simultaneously, separated by a comma e.g. :bash:`--singularity_bind_path "/path/to/bind1,/path/to/bind2"`.
+
+MCCS with CellProfiler: *ValueError: Images of type float must be between -1 and 1.*
+------------------------------------------------------------------------------------
+This error is caused by an inappropriate intensity rescaling factor in the MCCS CellProfiler implementation. Try increasing the rescaling factor in the MCCS CellProfiler pipeline file (e.g. from 10^5 to 10^6) and re-running the pipeline.
 
 .. _NISD-anchor:
 
