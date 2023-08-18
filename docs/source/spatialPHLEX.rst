@@ -67,6 +67,7 @@ First, clone the repository. Then, navigate to the `Spatial-PHLEX` directory.
 Then load Nextflow and Singularity on your system with e.g. (on SLURM):
 
 .. code-block:: bash
+    
     ml Nextflow/22.04.0
     ml Singularity/3.6.4
 
