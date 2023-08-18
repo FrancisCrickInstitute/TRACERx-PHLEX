@@ -38,12 +38,12 @@ The Spatial-PHLEX module allows the user to select a trio of cell types on which
 
 Using the example of a fibroblast cell type as the barrier cell type between CD8 T cells and tumour cell spatial clusters, each metric responds to a slightly different question:
 
-    -  Binary barrier - How often is a fibroblast spatially inter-positioned between a CD8 T cell and tumour nest on at least one path from CD8 T cell to tumour nest?
-    -  Binary adjacent barrier - How often is a fibroblast spatially inter-positioned between a CD8 T cell and tumour nest and positioned at the tumour-stroma interface, on at least one path from CD8 T cell to tumour nest?
-    -  Weighted barrier - To what extent are fibroblasts spatially inter-positioned between CD8 T cells and tumour and positioned in the vicinity of the tumour nest? 
-    -  All-paths barrier fraction - How often is a fibroblast spatially inter-positioned between a CD8 T cell and tumour nest, accounting for all possible routes from CD8 T cell to tumour nest?
-    -  All-paths adjacent barrier fraction - How often is a fibroblast spatially inter-positioned between a CD8 T cell and tumour nest and positioned at the tumour-stroma interface, accounting for all possible routes from CD8 T cell to tumour nest?
-    -  Barrier content - How many fibroblasts are typically spatially inter-positioned between a CD8 T cell and tumour nest?
+    -  **Barrier content**- How many fibroblasts are typically spatially inter-positioned between a CD8 T cell and tumour nest?
+    -  **Binary barrier **- How often is a fibroblast spatially inter-positioned between a CD8 T cell and tumour nest on at least one path from CD8 T cell to tumour nest?
+    -  **Binary adjacent barrier** - How often is a fibroblast spatially inter-positioned between a CD8 T cell and tumour nest and positioned at the tumour-stroma interface, on at least one path from CD8 T cell to tumour nest?
+    -  **Weighted barrier** - To what extent are fibroblasts spatially inter-positioned between CD8 T cells and tumour and positioned in the vicinity of the tumour nest? 
+    -  **All-paths barrier fraction** - How often is a fibroblast spatially inter-positioned between a CD8 T cell and tumour nest, accounting for all possible routes from CD8 T cell to tumour nest?
+    -  **All-paths adjacent barrier fraction** - How often is a fibroblast spatially inter-positioned between a CD8 T cell and tumour nest and positioned at the tumour-stroma interface, accounting for all possible routes from CD8 T cell to tumour nest?
 
 .. _Barrier scoring to spatial clusters:
 
@@ -56,27 +56,56 @@ Workflow 3: Barrier scoring to spatial clusters
 Example usage
 ===================
 
+First, clone the repository. Then, navigate to the `Spatial-PHLEX` directory.
+    
 .. code-block:: bash
 
-    ## Spatial-PHLEX
+    git clone https://github.com/FrancisCrickInstitute/Spatial-PHLEX
+    cd Spatial-PHLEX
+
+
+Then load Nextflow and Singularity on your system with e.g. (on SLURM):
+
+.. code-block:: bash
+    ml Nextflow/22.04.0
+    ml Singularity/3.6.4
+
+
+Set the Singularity cache directory environment variable, to store the container image:
+
+.. code-block:: bash
+    
+    export NXF_SINGULARITY_CACHEDIR='./singularity'
+
+
+The Spatial PHLEX pipeline can then be run with the following command:
+
+.. code-block:: bash
+
     nextflow run ./main.nf \
-        --objects "./data/cell_objects.csv"\
-        --objects_delimiter ","\
-        --image_id_col "Image_ID"\
-        --phenotyping_column "Phenotype"\
-        --phenotype_to_cluster "Epithelial cells"\
+        --workflow_name 'clustered_barrier' \
+        --objects "./data/PHLEX_test_cell_objects.csv"\
+        --objects_delimiter "\t" \
+        --image_id_col "imagename"\
+        --phenotyping_column 'majorType'\
+        --phenotype_to_cluster 'Epithelial cells'\
         --x_coord_col "centerX"\
         --y_coord_col "centerY"\
-        --barrier_phenotyping_column "Phenotype" \
-        --outdir "../results" \
-        --release "PHLEX_example" \
-        --workflow_name "clustered_barrier" \
+        --barrier_phenotyping_column "majorType" \
         --barrier_source_cell_type "CD8 T cells"\
         --barrier_target_cell_type "Epithelial cells"\
-        --barrier_cell_type "aSMA+ Fibroblasts"\
-        --n_neighbours 5\
+        --barrier_cell_type "aSMA+ cells"\
+        --n_neighbours 10\
+        --outdir "../results" \
+        --release 'PHLEX_test' \
+        --plot_palette "./assets/PHLEX_test_palette.json" \
         -w "./scratch"\
+        -profile {your_nf-core_profile} \
         -resume
+
+
+Replace {your_nf-core_profile} with the profile for your organisation, e.g. `crick`. For more information on nf-core profiles, see the [list of available nf-core configs](https://github.com/nf-core/configs) plus other advice on pipeline configuration [here](https://nf-co.re/usage/configuration#profiles).
+
 
 Input Files
 ==================
@@ -192,7 +221,12 @@ Spatial PHLEX parameters are defined in the nextflow.config file in the Spatial 
 
 Troubleshooting
 ===============
-
+Input file paths are not found
+-----------------------------------------
+This may be caused by several issues:
+1. The input file path is incorrectly specified in the Spatial-PHLEX run command. Check all input file paths are correct.
+2. If input file paths are correct for your system then it is possible that Spatial-PHLEX is not able to access the input files due to the file permissions. Check that the user running the Spatial-PHLEX pipeline has read access to the input files.
+3. If file paths are correct, and permissions are correct, then Spatial-PHLEX may not be mounting the input file paths correctly in the Spatial-PHLEX Singularity container. Spatial-PHLEX tries to mount filepaths automatically, but occasionally this may fail. In this case the ``--singularity_bind_path`` parameter can be specified manually in the Spatial-PHLEX run command or ``nextflow.config`` file. Multiple bind paths may be specified simultaneously, separated by a comma e.g. :bash:`--singularity_bind_path "/path/to/bind1,/path/to/bind2"`.
 
 Cell type niche analysis via density-based spatial clustering
 -------------------------------------------------------------
