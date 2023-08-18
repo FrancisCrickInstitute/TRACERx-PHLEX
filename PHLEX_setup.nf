@@ -12,7 +12,7 @@ process download_test_data {
     output: file '*/*.tiff'
 
     """
-    wget https://zenodo.org/record/7665181/files/PHLEX_test_images.zip
+    wget https://zenodo.org/record/8252955/files/PHLEX_test_images.zip
     unzip PHLEX_test_images.zip
     rm PHLEX_test_images.zip
     """
@@ -27,7 +27,7 @@ process download_weights {
         file '*/*.pkl'
 
     """
-    wget https://zenodo.org/record/7665181/files/deep-imcyto_weights.zip
+    wget https://zenodo.org/record/8252955/files/deep-imcyto_weights.zip
     unzip deep-imcyto_weights.zip
     rm deep-imcyto_weights.zip
     """
