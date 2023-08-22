@@ -6,7 +6,7 @@ ml Nextflow/22.04.0
 ml Singularity/3.6.4
 
 # export cache directory for singularity
-export NXF_SINGULARITY_CACHEDIR='Singularity_cache'
+export NXF_SINGULARITY_CACHEDIR='.singularity'
 
 release="PHLEX_test"
 
@@ -31,35 +31,22 @@ nextflow run TRACERx-PHLEX/deep-imcyto/main.nf \
 
 # TYPEx
 nextflow run TRACERx-PHLEX/TYPEx/main.nf \
-   -c $PWD/TRACERx-PHLEX/TYPEx/conf/testdata.config \
-   --input_dir $PWD/results/deep-imcyto/$release/ \
-   --sample_file $PWD/TRACERx-PHLEX/TYPEx/data/sample_data.tracerx.txt \
-   --release $release \
-   --output_dir "$PWD/results/TYPEx/$release/" \
-   --params_config "$PWD/TRACERx-PHLEX/TYPEx/data/typing_params.json" \
-   --annotation_config "$PWD/TRACERx-PHLEX/TYPEx/data/cell_type_annotation.p1.json" \
-   --deep_imcyto true --mccs true \
-   -profile singularity \
-   --wd "scratch" \
-   -resume
+     -c $PWD/TRACERx-PHLEX/TYPEx/test.config \
+     --input_dir $PWD/results/deep-imcyto/$release/ \
+     --sample_file $PWD/TRACERx-PHLEX/TYPEx/data/sample_file.tracerx.txt \
+     --release $release \
+     --params_config "$PWD/TRACERx-PHLEX/TYPEx/data/typing_params_MCCS.json" \
+     --annotation_config "$PWD/TRACERx-PHLEX/TYPEx/data/cell_type_annotation.testdata.json" \
+     --color_config $PWD/TRACERx-PHLEX/TYPEx/data/celltype_colors.json \
+     --tissue_seg_model "$PWD/TRACERx-PHLEX/TYPEx/models/tumour_stroma_classifier.ilp" \
+     --output_dir "$PWD/results/TYPEx/$release/" \
+     --deep_imcyto true --mccs true \
+     -profile singularity \
+     -w 'scratch' \
+     -resume
    
    
 # Spatial-PHLEX
-# nextflow run TRACERx-PHLEX/Spatial-PHLEX/main.nf \
-#    --sampleFile "$PWD/TRACERx-PHLEX/Spatial-PHLEX/data/sample_data.tracerx.txt"\
-#    --objects "$PWD/results/TYPEx/$release/summary/*/cell_objects_${release}_p1.txt"\
-#    --phenotyping_column "majorType" \
-#    --barrier_phenotyping_column "majorType" \
-#    --outdir "$PWD/results" \
-#    --release $release \
-#    --workflow_name "default" \
-#    --barrier_source_cell_type "CD8 T cells"\
-#    --barrier_target_cell_type "Epithelial cells"\
-#    --barrier_cell_type "aSMA+ cells"\
-#    -w "scratch" \
-#    -resume
-
-
 nextflow run ./main.nf \
    --workflow_name 'clustered_barrier' \
    --objects "$PWD/results/TYPEx/$release/summary/*/cell_objects_${release}_p1.txt"\
