@@ -37,11 +37,11 @@ Running TYPEx on input generated with deep-imcyto
         --input_dir $PWD/results/deep-imcyto/$release/ \
         --sample_file $PWD/TRACERx-PHLEX/TYPEx/data/sample_file.tracerx.txt \
         --release $release \
-        --output_dir "$PWD/results/TYPEx/$release/" \
-        --params_config "$PWD/TRACERx-PHLEX/TYPEx/conf/typing_params.json" \
-        --annotation_config "$PWD/TRACERx-PHLEX/TYPEx/data/cell_type_annotation.p1.json" \
-        --tissue_seg_model "$PWD/TRACERx-PHLEX/TYPEx/models/tumour_stroma_classifier.ilp" \
+        --params_config "$PWD/TRACERx-PHLEX/TYPEx/data/typing_params_MCCS.json" \
+        --annotation_config "$PWD/TRACERx-PHLEX/TYPEx/data/cell_type_annotation.testdata.json" \
 	--color_config $PWD/TRACERx-PHLEX/TYPEx/data/celltype_colors.json \
+        --tissue_seg_model "$PWD/TRACERx-PHLEX/TYPEx/models/tumour_stroma_classifier.ilp" \
+        --output_dir "$PWD/results/TYPEx/$release/" \
         --deep_imcyto true --mccs true \
         -profile singularity \
         -resume
@@ -59,14 +59,16 @@ Running TYPEx with user-provided cell objects tables (indpendently of deep-imcyt
     --release $release \
     --input_table $PWD/TYPEx/data/cell_objects.tracerx.txt \
     --sample_file $PWD/TYPEx/data/sample_file.tracerx.txt \
-    --output_dir "$PWD/results/TYPEx/$release/" \
     --params_config "$PWD/TYPEx/data/typing_params.json" \
-    --annotation_config "$PWD/TYPEx/data/cell_type_annotation.p1.json" \
+    --annotation_config "$PWD/TYPEx/data/cell_type_annotation.testdata.json" \
     --color_config $PWD/TYPEx/data/celltype_colors.json \
+    --output_dir "$PWD/results/TYPEx/$release/" \
+    --tissue_seg_model "$PWD/TRACERx-PHLEX/TYPEx/models/tissue_classifier.ilp" \
     -profile singularity \
     -resume
 
-Running TYPEx locally without high-perfomance computing server
+Running TYPEx locally
+--------------
 
 .. code-block:: bash
 
