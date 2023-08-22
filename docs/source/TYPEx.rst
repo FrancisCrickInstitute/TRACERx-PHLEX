@@ -27,7 +27,7 @@ Usage
         
         git clone git@github.com:FrancisCrickInstitute/TYPEx.git
 
-Running TYPEx on input generated with deep-imcyto
+Running TYPEx on input generated with deep-imcyto in MCCS mode
 --------------
 
 .. code-block:: bash
@@ -45,6 +45,26 @@ Running TYPEx on input generated with deep-imcyto
         --deep_imcyto true --mccs true \
         -profile singularity \
         -resume
+
+Running TYPEx on input generated with deep-imcyto in simple segmentation mode
+--------------
+
+.. code-block:: bash
+
+   nextflow run TRACERx-PHLEX/TYPEx/main.nf \
+        -c $PWD/TRACERx-PHLEX/TYPEx/test.config \
+        --input_dir $PWD/results/deep-imcyto/$release/ \
+        --sample_file $PWD/TRACERx-PHLEX/TYPEx/data/sample_file.tracerx.txt \
+        --release $release \
+        --params_config "$PWD/TRACERx-PHLEX/TYPEx/data/typing_params.json" \
+        --annotation_config "$PWD/TRACERx-PHLEX/TYPEx/data/cell_type_annotation.testdata.json" \
+	--color_config $PWD/TRACERx-PHLEX/TYPEx/data/celltype_colors.json \
+        --tissue_seg_model "$PWD/TRACERx-PHLEX/TYPEx/models/tumour_stroma_classifier.ilp" \
+        --output_dir "$PWD/results/TYPEx/$release/" \
+        --deep_imcyto true --mccs false \
+        -profile singularity \
+        -resume
+
 
 Running TYPEx with user-provided cell objects tables (indpendently of deep-imcyto)
 --------------
