@@ -47,7 +47,7 @@ nextflow run TRACERx-PHLEX/TYPEx/main.nf \
    
    
 # Spatial-PHLEX
-nextflow run ./main.nf \
+nextflow run TRACERx-PHLEX/Spatial-PHLEX/main.nf \
    --workflow_name 'clustered_barrier' \
    --objects "$PWD/results/TYPEx/$release/summary/*/cell_objects_${release}_p1.txt"\
    --objects_delimiter "\t" \
