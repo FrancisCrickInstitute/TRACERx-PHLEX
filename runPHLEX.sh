@@ -6,7 +6,7 @@ ml Nextflow/22.04.0
 ml Singularity/3.6.4
 
 # export cache directory for singularity
-export NXF_SINGULARITY_CACHEDIR='Singularity_cache'
+export NXF_SINGULARITY_CACHEDIR='.singularity'
 
 release="PHLEX_test"
 
@@ -23,6 +23,7 @@ nextflow run TRACERx-PHLEX/deep-imcyto/main.nf \
    --segmentation_cppipe "$assetsDir/cppipes/MCCS/segmentationP1.cppipe" \
    --mccs_stack_cppipe "$assetsDir/cppipes/MCCS/mccs_stack_preprocessing.cppipe" \
    --compensation_tiff "$assetsDir/spillover/P1_imc*.tiff" \
+   --singularity_bind_path '/camp,/nemo'\
    --plugins "$assetsDir/plugins" \
    -profile crick \
    -w 'scratch' \
@@ -30,30 +31,40 @@ nextflow run TRACERx-PHLEX/deep-imcyto/main.nf \
 
 # TYPEx
 nextflow run TRACERx-PHLEX/TYPEx/main.nf \
-   -c $PWD/TRACERx-PHLEX/TYPEx/conf/testdata.config \
-   --input_dir $PWD/results/deep-imcyto/$release/ \
-   --sample_file $PWD/TRACERx-PHLEX/TYPEx/data/sample_data.tracerx.txt \
-   --release $release \
-   --output_dir "$PWD/results/TYPEx/$release/" \
-   --params_config "$PWD/TRACERx-PHLEX/TYPEx/data/typing_params.json" \
-   --annotation_config "$PWD/TRACERx-PHLEX/TYPEx/data/cell_type_annotation.p1.json" \
-   --deep_imcyto true --mccs true \
-   -profile singularity \
-   --wd "scratch" \
-   -resume
+     -c $PWD/TRACERx-PHLEX/TYPEx/test.config \
+     --input_dir $PWD/results/deep-imcyto/$release/ \
+     --sample_file $PWD/TRACERx-PHLEX/TYPEx/data/sample_file.tracerx.txt \
+     --release $release \
+     --params_config "$PWD/TRACERx-PHLEX/TYPEx/data/typing_params_MCCS.json" \
+     --annotation_config "$PWD/TRACERx-PHLEX/TYPEx/data/cell_type_annotation.testdata.json" \
+     --color_config $PWD/TRACERx-PHLEX/TYPEx/data/celltype_colors.json \
+     --tissue_seg_model "$PWD/TRACERx-PHLEX/TYPEx/models/tumour_stroma_classifier.ilp" \
+     --output_dir "$PWD/results/TYPEx/$release/" \
+     --deep_imcyto true --mccs true \
+     -profile singularity \
+     -w 'scratch' \
+     -resume
    
    
 # Spatial-PHLEX
 nextflow run TRACERx-PHLEX/Spatial-PHLEX/main.nf \
-   --sampleFile "$PWD/TRACERx-PHLEX/Spatial-PHLEX/data/sample_data.tracerx.txt"\
+   --workflow_name 'clustered_barrier' \
    --objects "$PWD/results/TYPEx/$release/summary/*/cell_objects_${release}_p1.txt"\
-   --phenotyping_column "majorType" \
+   --objects_delimiter "\t" \
+   --image_id_col "imagename"\
+   --phenotyping_column 'majorType'\
+   --phenotype_to_cluster 'Epithelial cells'\
+   --x_coord_col "centerX"\
+   --y_coord_col "centerY"\
    --barrier_phenotyping_column "majorType" \
-   --outdir "$PWD/results" \
-   --release $release \
-   --workflow_name "default" \
    --barrier_source_cell_type "CD8 T cells"\
    --barrier_target_cell_type "Epithelial cells"\
    --barrier_cell_type "aSMA+ cells"\
-   -w "scratch" \
+   --n_neighbours 10\
+   --outdir "../results" \
+   --release $release \
+   --singularity_bind_path '/camp,/nemo'\
+   --plot_palette "$PWD/assets/PHLEX_test_palette.json" \
+   -w "scratch"\
+   -profile crick \
    -resume

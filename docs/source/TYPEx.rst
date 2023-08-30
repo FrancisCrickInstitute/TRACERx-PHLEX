@@ -27,7 +27,7 @@ Usage
         
         git clone git@github.com:FrancisCrickInstitute/TYPEx.git
 
-Running TYPEx on input generated with deep-imcyto
+Running TYPEx on input generated with deep-imcyto in MCCS mode
 --------------
 
 .. code-block:: bash
@@ -37,14 +37,34 @@ Running TYPEx on input generated with deep-imcyto
         --input_dir $PWD/results/deep-imcyto/$release/ \
         --sample_file $PWD/TRACERx-PHLEX/TYPEx/data/sample_file.tracerx.txt \
         --release $release \
-        --output_dir "$PWD/results/TYPEx/$release/" \
-        --params_config "$PWD/TRACERx-PHLEX/TYPEx/conf/typing_params.json" \
-        --annotation_config "$PWD/TRACERx-PHLEX/TYPEx/data/cell_type_annotation.p1.json" \
-        --tissue_seg_model "$PWD/TRACERx-PHLEX/TYPEx/models/tumour_stroma_classifier.ilp" \
+        --params_config "$PWD/TRACERx-PHLEX/TYPEx/data/typing_params_MCCS.json" \
+        --annotation_config "$PWD/TRACERx-PHLEX/TYPEx/data/cell_type_annotation.testdata.json" \
 	--color_config $PWD/TRACERx-PHLEX/TYPEx/data/celltype_colors.json \
+        --tissue_seg_model "$PWD/TRACERx-PHLEX/TYPEx/models/tumour_stroma_classifier.ilp" \
+        --output_dir "$PWD/results/TYPEx/$release/" \
         --deep_imcyto true --mccs true \
         -profile singularity \
         -resume
+
+Running TYPEx on input generated with deep-imcyto in simple segmentation mode
+--------------
+
+.. code-block:: bash
+
+   nextflow run TRACERx-PHLEX/TYPEx/main.nf \
+        -c $PWD/TRACERx-PHLEX/TYPEx/test.config \
+        --input_dir $PWD/results/deep-imcyto/$release/ \
+        --sample_file $PWD/TRACERx-PHLEX/TYPEx/data/sample_file.tracerx.txt \
+        --release $release \
+        --params_config "$PWD/TRACERx-PHLEX/TYPEx/data/typing_params.json" \
+        --annotation_config "$PWD/TRACERx-PHLEX/TYPEx/data/cell_type_annotation.testdata.json" \
+	--color_config $PWD/TRACERx-PHLEX/TYPEx/data/celltype_colors.json \
+        --tissue_seg_model "$PWD/TRACERx-PHLEX/TYPEx/models/tumour_stroma_classifier.ilp" \
+        --output_dir "$PWD/results/TYPEx/$release/" \
+        --deep_imcyto true --mccs false \
+        -profile singularity \
+        -resume
+
 
 Running TYPEx with user-provided cell objects tables (indpendently of deep-imcyto)
 --------------
@@ -59,14 +79,16 @@ Running TYPEx with user-provided cell objects tables (indpendently of deep-imcyt
     --release $release \
     --input_table $PWD/TYPEx/data/cell_objects.tracerx.txt \
     --sample_file $PWD/TYPEx/data/sample_file.tracerx.txt \
-    --output_dir "$PWD/results/TYPEx/$release/" \
     --params_config "$PWD/TYPEx/data/typing_params.json" \
-    --annotation_config "$PWD/TYPEx/data/cell_type_annotation.p1.json" \
+    --annotation_config "$PWD/TYPEx/data/cell_type_annotation.testdata.json" \
     --color_config $PWD/TYPEx/data/celltype_colors.json \
+    --output_dir "$PWD/results/TYPEx/$release/" \
+    --tissue_seg_model "$PWD/TRACERx-PHLEX/TYPEx/models/tissue_classifier.ilp" \
     -profile singularity \
     -resume
 
-Running TYPEx locally without high-perfomance computing server
+Running TYPEx locally
+--------------
 
 .. code-block:: bash
 
@@ -187,17 +209,23 @@ These include densities of identified cell phenotypes (cell_density_*.txt), a ca
 .. code-block:: bash
 
         summary
-        ├── cell_density_*.txt
-        ├── cell_objects_*.txt
-        ├── phenotypes.*.txt          
-        ├── summary_*.cell_stats.txt
-        ├── categs_summary_*.cell_stats.txt
 	├── maps
 	├── intensity_plots
 	├── overlays
+	├── tables
+	        ├── cell_density_*.txt
+	        ├── cell_objects_*.txt
+	        ├── phenotypes.*.txt          
+	        ├── summary_*.cell_stats.txt
+	        ├── categs_summary_*.cell_stats.txt
 
-.. _Guide: Customising cell-type definitions
-       
+Guide
+===============
+Cell-type definition file and cell assignment
+---------------
+Marker selection for D-score threshold
+---------------
+
 Troubleshooting
 =============
 1. **Pipeline has finished after the formatting input files (PREPROCESS) and tissue segmentation (TISSEG) processes without starting processes related to typing.**
@@ -336,5 +364,3 @@ If using deep-imcyto as input, make sure that the metal-Ab namings is consistent
 
 Review the config file ``tissue_segmentation.json`` for any syntax errors or use an online json validator.
 
-Q&A
-----

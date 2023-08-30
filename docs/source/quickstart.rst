@@ -44,8 +44,11 @@ Quick start
          │   ├── nuclear_morph_scaler.pkl
          │   └── nucleus_edge_weighted.hdf5
          ├── PHLEX_test_images
+         │   ├── P1_TMA002_L_201906190-roi_16.ome.tiff
+         │   ├── P1_TMA005_R_20190619-roi_4.ome.tiff
          │   ├── P1_TMA006_L_20190619-roi_24.ome.tiff
-         │   └── P1_TMA007_L_20190619-roi_13.ome.tiff
+         │   ├── P1_TMA006_L_20190619-roi_6.ome.tiff
+         │   └── P1_TMA007_L_20190619-roi_12.ome.tiff
          └── runPHLEX.sh
 
 #. Launch TRACERx-PHLEX by calling the ``runPHLEX.sh`` script from the command line:
