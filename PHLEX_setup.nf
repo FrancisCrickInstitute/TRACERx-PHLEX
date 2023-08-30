@@ -13,7 +13,7 @@ process download_test_data {
 
     """
     wget https://zenodo.org/record/8263899/files/PHLEX_test_images.zip
-    unzip PHLEX_test_images.zip
+    unzip PHLEX_test_images.zip -d PHLEX_test_images
     rm PHLEX_test_images.zip
     """
 }
