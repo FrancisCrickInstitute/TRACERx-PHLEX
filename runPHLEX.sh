@@ -49,7 +49,7 @@ nextflow run TRACERx-PHLEX/TYPEx/main.nf \
 # Spatial-PHLEX
 nextflow run TRACERx-PHLEX/Spatial-PHLEX/main.nf \
    --workflow_name 'clustered_barrier' \
-   --objects "$PWD/results/TYPEx/$release/summary/*/cell_objects_${release}_p1.txt"\
+   --objects "$PWD/results/TYPEx/$release/summary/*/tables/cell_objects_${release}_p1.txt"\
    --objects_delimiter "\t" \
    --image_id_col "imagename"\
    --phenotyping_column 'majorType'\
@@ -64,7 +64,6 @@ nextflow run TRACERx-PHLEX/Spatial-PHLEX/main.nf \
    --outdir "../results" \
    --release $release \
    --singularity_bind_path '/camp,/nemo'\
-   --plot_palette "$PWD/assets/PHLEX_test_palette.json" \
    -w "scratch"\
    -profile crick \
    -resume
