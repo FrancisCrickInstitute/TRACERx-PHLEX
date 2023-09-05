@@ -39,7 +39,7 @@ Running TYPEx on input generated with deep-imcyto in MCCS mode
         --release $release \
         --params_config "$PWD/TRACERx-PHLEX/TYPEx/data/typing_params_MCCS.json" \
         --annotation_config "$PWD/TRACERx-PHLEX/TYPEx/data/cell_type_annotation.testdata.json" \
-	--color_config $PWD/TRACERx-PHLEX/TYPEx/data/celltype_colors.json \
+	--color_config $PWD/TRACERx-PHLEX/TYPEx/conf/celltype_colors.json \
         --tissue_seg_model "$PWD/TRACERx-PHLEX/TYPEx/models/tumour_stroma_classifier.ilp" \
         --output_dir "$PWD/results/TYPEx/$release/" \
         --deep_imcyto true --mccs true \
@@ -58,7 +58,7 @@ Running TYPEx on input generated with deep-imcyto in simple segmentation mode
         --release $release \
         --params_config "$PWD/TRACERx-PHLEX/TYPEx/data/typing_params.json" \
         --annotation_config "$PWD/TRACERx-PHLEX/TYPEx/data/cell_type_annotation.testdata.json" \
-	--color_config $PWD/TRACERx-PHLEX/TYPEx/data/celltype_colors.json \
+	--color_config $PWD/TRACERx-PHLEX/TYPEx/conf/celltype_colors.json \
         --tissue_seg_model "$PWD/TRACERx-PHLEX/TYPEx/models/tumour_stroma_classifier.ilp" \
         --output_dir "$PWD/results/TYPEx/$release/" \
         --deep_imcyto true --mccs false \
@@ -81,7 +81,7 @@ Running TYPEx with user-provided cell objects tables (indpendently of deep-imcyt
     --sample_file $PWD/TYPEx/data/sample_file.tracerx.txt \
     --params_config "$PWD/TYPEx/data/typing_params.json" \
     --annotation_config "$PWD/TYPEx/data/cell_type_annotation.testdata.json" \
-    --color_config $PWD/TYPEx/data/celltype_colors.json \
+    --color_config $PWD/TYPEx/conf/celltype_colors.json \
     --output_dir "$PWD/results/TYPEx/$release/" \
     --tissue_seg_model "$PWD/TRACERx-PHLEX/TYPEx/models/tissue_classifier.ilp" \
     -profile singularity \
@@ -103,7 +103,7 @@ Running TYPEx locally
 	    --outDir "$PWD/results/TYPEx/$release/" \
 	    --params_config "$PWD/TYPEx/data/typing_params.json" \
 	    --annotation_config "$PWD/TYPEx/data/cell_type_annotation.json" \
-		--color_config $PWD/TYPEx/data/celltype_colors.json \
+		--color_config $PWD/TYPEx/conf/celltype_colors.json \
 	    -profile docker \
 	    -resume
 
