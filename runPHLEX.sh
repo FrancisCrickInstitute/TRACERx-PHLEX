@@ -37,7 +37,7 @@ nextflow run TRACERx-PHLEX/TYPEx/main.nf \
      --release $release \
      --params_config "$PWD/TRACERx-PHLEX/TYPEx/data/typing_params_MCCS.json" \
      --annotation_config "$PWD/TRACERx-PHLEX/TYPEx/data/cell_type_annotation.testdata.json" \
-     --color_config $PWD/TRACERx-PHLEX/TYPEx/data/celltype_colors.json \
+     --color_config $PWD/TRACERx-PHLEX/TYPEx/conf/celltype_colors.json \
      --tissue_seg_model "$PWD/TRACERx-PHLEX/TYPEx/models/tumour_stroma_classifier.ilp" \
      --output_dir "$PWD/results/TYPEx/$release/" \
      --deep_imcyto true --mccs true \
