@@ -61,7 +61,7 @@ Quick start
 
 .. note:: 
 
-   The first time PHLEX is run, Nextflow will download all the necessary docker images that are required to run PHLEX. This may take a while and it may appear as if a particular process is hanging wilst the containers are built. Subsequent runs will be much faster.
+   The first time PHLEX is run, Nextflow will download all the necessary Docker images that are required to run PHLEX. This may take a while and it may appear as if a particular process is hanging whilst the containers are built. Subsequent runs will be much faster. Download of these image files and execution of local Nextflow processes will require sufficient memory. Error messages will flag insufficient memory.
 
 
 Tutorial
