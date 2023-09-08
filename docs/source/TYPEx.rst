@@ -221,8 +221,15 @@ These include densities of identified cell phenotypes (cell_density_*.txt), a ca
 
 Guide
 ===============
+
 Cell-type definition file and cell assignment
 ---------------
+
+Several template files are provided with the TYPEx distribution designed for the antibody panels analysed in this protocol, which can be adjusted to match a new antibody panel. The cell type definitions file includes a list of major cell lineages and a list of the cell subtypes targeted by the panel of interest. The key step is selection of the markers that define these cell lineages and subtypes. 
+
+To identify the major cell lineages and the associated lineage-specific markers, the first step is to select the markers with significantly higher intensities expected in one cell lineage, which in the case of the T cells & Stroma panel included CD4 and CD8 T cells (CD3, CD4, CD8), aSMA+ cells (aSMA), Endothelial cells (CD31), and Epithelial cells (panCK). The next step is to define the cell lineages targeted by markers in the panel that can also be expressed in other cell types, such as Leukocytes - Other (CD45), T cells - Other (CD3) and Vimentin+ cells (Vimentin). Such non-specific markers can also be added to the definitions of other cell lineages that express them only when they are hierarchically related. Therefore, CD45 and CD3 were added to the definitions of CD4 and CD8 T cells. For this reason, although Vimentin can also be expressed by immune cells, it was included only in the definitions of stromal cells.
+
+The main considerations that differ between cell lineage and subtype definitions is the specificity of the markers. For the lineage definitions, the aim is to identify the most likely cell lineage, and the specificity of the markers is therefore not prioritised. For example, in the Pan-Immune panel, both CD4 T cells and Macrophages are defined as major cell lineages. Although CD4 can be expressed also on Macrophages, the most likely cell type will be assigned based on the combination of provided markers for CD4 T cells (CD3, CD4) and macrophages (CD68, CD163, CD206). However, for the subtype definitions, if CD4 is included only for CD4 T cells, the cell subtype assignment considers this marker to be specific for CD4 T cells, and renders any CD4+ macrophage as Ambiguous. In addition, any co-expresion due to non-specific antibody binding also needs to be considered in this step. Therefore, the subtype definitions step requires understanding of the specificity for the subtype-specific markers in the context of the analysed type of tissue and experimental settings.
 
 Marker selection for D-score threshold
 ---------------
