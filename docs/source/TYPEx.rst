@@ -225,6 +225,30 @@ Cell-type definition file and cell assignment
 ---------------
 Marker selection for D-score threshold
 ---------------
+By default, marker positivity for all markers in the panel is determined based on the co-expression patterns of three T cell markers, CD3, CD4 and CD8a.
+
+If these markers are present in the antibody panel, confirm that these names match the column names in the input cell objects table provided in standalone mode or the `cells.csv` table generated from deep-imcyto. 
+
+ .. code-block:: json-object
+
+	"threshold":{
+	      "markers":["CD3", "CD4", "CD8"], 
+		  "high_frequency":["CD3_CD4", "CD3_CD8"],
+		  "variable":["CD4"],
+		  "low_frequency":["CD3"],
+		  "rare":["CD8", "CD4_CD8", "CD3_CD4_CD8"]
+	},
+
+The typing params config file specifies by default that the double-positive CD3+/-CD4+CD8a+ and single-positive CD8a+ cells are expected to rarely be found in peripheral non-lymphoid tissue, whereas CD3+CD4+ and CD3+CD8a+ to be the dominant population in the analysed cohort. Cells expected with low frequency were CD3+ while cells expected with variable frequency were CD4+. Based on this, TYPEx estimates an optimal D score threshold that minimises the rare but maximises the dominant subpopulations, visualised in `<outDir>/subtypes/*/*_plots/threshold.*pdf`. Two optimal thresholds are determined individually for the low and high-confidence cells in a cohort and applied across all clusters. These thresholds are estimated automatically for each dataset, antibody panel and cohort. Even though only three T cell markers are used to determine the D-score cutoff, this does not restrict the identification of other cell subpopulations in the dataset.
+
+! CRITICAL: An important consideration is also any non-specific binding the default T cell markers may have (Supplementary Methods).
+Finding the optimal D-score cutoff may be affected by non-specific binding of the markers used for threshold detection. Such cases can be recognised by the separation curves shown in `<outDir>/subtypes/*/*_plots/threshold.*pdf` and Figures 3c-d in Magness `et al.`, when the curve is not concave upward for both the low- or high-confidence groups. As a result, the D-score cutoff will be too low and resulting with many Ambiguous cells or very high, resulting with many Unassigned cells.
+
+One such scenario is when CD8, for example, binds nonspecifically to other cell types. In the Barretts’s esophagus CODEX dataset (Brbic et al.), we observed high CD8 intensities on the myeloid cell populations (CD11b+ and CD15+). Therefore, the typing params config file was modified so that single-positive CD8 was excluded from the list of rare subpopulations and single-positive CD4 was added instead.
+
+Similarly, if CD4 has low signal-to-noise ratio, the CD4 single-positive curve may peak at the lowest D values resulting with a low D-score cutoff. In such case, consider moving CD4 to the list of rare subpopulations.
+
+If these three markers are not present in the cohort, the implementation of TYPEx allows for any markers with similar patterns of co-expression and mutual exclusivity to be specified in the input config file, typing_params.json. For example, if CD3 is not included in the cohort, CD45 can be used to replace CD3, where the frequent subpopulations can be defined as CD45+CD4+ and CD45+CD8+ whereas rare subpopulations can be CD4+ (CD45-), CD8+ (CD45-), CD4+CD8+, and CD45+CD4+CD8+.
 
 Troubleshooting
 =============
