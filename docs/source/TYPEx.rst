@@ -330,7 +330,7 @@ The markers specific for cell lineages and cell subtypes need to be defined as l
 
  .. code-block:: bash
 
-	--major_markers 'users_major_markers’ \
+	--major_markers 'users_major_markers' \
 	--subtype_markers 'users_subtype_markers' \
 
 9. **ERROR: Cell type-specific markers not provided for positivity calling/**
