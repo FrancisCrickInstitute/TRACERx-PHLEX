@@ -85,7 +85,7 @@ The Spatial PHLEX pipeline can then be run with the following command:
 
     nextflow run ./main.nf \
         --workflow_name 'clustered_barrier' \
-        --objects "./data/PHLEX_test_cell_objects.csv"\
+        --objects "$PWD/data/PHLEX_test_cell_objects.txt"\
         --objects_delimiter "\t" \
         --image_id_col "imagename"\
         --phenotyping_column 'majorType'\
@@ -99,7 +99,7 @@ The Spatial PHLEX pipeline can then be run with the following command:
         --n_neighbours 10\
         --outdir "../results" \
         --release 'PHLEX_test' \
-        --plot_palette "./assets/PHLEX_test_palette.json" \
+        --plot_palette "$PWD/assets/PHLEX_test_palette.json" \
         -w "./scratch"\
         -profile {your_nf-core_profile} \
         -resume
