@@ -42,7 +42,7 @@ nextflow -log "$PWD/results/TYPEx/$release/logs/TYPEx.log" \
     --color_config $PWD/TRACERx-PHLEX/TYPEx/conf/celltype_colors.json \
     --tissue_seg_model "$PWD/TRACERx-PHLEX/TYPEx/models/tumour_stroma_classifier.ilp" \
     --output_dir "$PWD/results/TYPEx/$release/" \
-    --deep_imcyto true --mccs true \
+    --deep_imcyto true --cellprofiler true \
     -profile singularity \
     -w 'scratch' \
     -resume
