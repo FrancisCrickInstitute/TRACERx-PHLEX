@@ -24,7 +24,7 @@ Check out the :doc:`quickstart` section for further information, including :ref:
 TRACERx-PHLEX contains three submodules:
 
 
-:doc:`PHLEX: deep-imcyto<deep-imcyto>`
+:ref:`PHLEX: deep-imcyto<deep-imcyto>`
 ---------------------------------------
 
    A module devoted to performing accurate nuclear and cellular segmentation and single cell measurement in multiplex images.
@@ -34,7 +34,7 @@ TRACERx-PHLEX contains three submodules:
 
    A module for cellular phenotyping from marker expression intensities derived from multiplex images.
 
-:ref:`Spatial-PHLEX<Spatial-PHLEX>`
+:ref:`PHLEX: Spatial-PHLEX<Spatial-PHLEX>`
 ---------------------------------------
 
    A module for performing several types of automated spatial analysis.
