@@ -11,7 +11,7 @@ TRACERx-PHLEX: One-stop pipeline for robust multiplexed imaging analyses
 
 Citations
 +++++++++++++++
-The pipeline is described in .
+The pipeline is described in Magness et al. Nature Communications, in press.
 
 
 Introduction
