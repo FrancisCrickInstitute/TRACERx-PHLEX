@@ -85,6 +85,12 @@ Detailed description on parameters, input files and functionalities is described
 
 Data Repository
 +++++++++++++++
+The imaging mass cytometry datasets associated with Enfield et al., Cancer Discovery, 2024 and Magness et al., Nature Communications, 2024, are available for access requests under
+https://zenodo.org/records/12587543
+
+Download a step-by-step guide
++++++++++++++++
+:download:`Download <docs/source/ReadTheDocs_Tutorial.pdf>`
 
 Contact
 +++++++++++++++
