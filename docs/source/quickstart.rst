@@ -90,7 +90,7 @@ https://zenodo.org/records/12587543
 
 Download a step-by-step guide
 +++++++++++++++
-:download:`Download <docs/source/ReadTheDocs_Tutorial.pdf>`
+:download:`Download <docs/source/_files/ReadTheDocs_Tutorial.pdf>`
 
 Contact
 +++++++++++++++
