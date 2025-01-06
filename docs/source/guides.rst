@@ -10,7 +10,7 @@ The imaging mass cytometry datasets associated with Enfield et al., Cancer Disco
 https://zenodo.org/records/12587543
 
 Multiplexed consensus cell segmentation (MCCS)
-=====================================================
++++++++++++++++
 
 .. |consensus| figure:: _files/images/consensus.png
         :width: 800
