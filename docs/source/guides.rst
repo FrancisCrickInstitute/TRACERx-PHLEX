@@ -1,5 +1,14 @@
 .. _guides:
 
+Download a step-by-step guide
++++++++++++++++
+:download:`Download <_files/ReadTheDocs_Tutorial.pdf>`
+
+Data Repository
++++++++++++++++
+The imaging mass cytometry datasets associated with Enfield et al., Cancer Discovery, 2024 and Magness et al., Nature Communications, 2024, are available for access requests under
+https://zenodo.org/records/12587543
+
 Multiplexed consensus cell segmentation (MCCS)
 =====================================================
 .. |consensus| figure:: _files/images/consensus.png
