@@ -83,14 +83,6 @@ Detailed description on parameters, input files and functionalities is described
 
    A module for performing several types of automated spatial analysis.
 
-Data Repository
-+++++++++++++++
-The imaging mass cytometry datasets associated with Enfield et al., Cancer Discovery, 2024 and Magness et al., Nature Communications, 2024, are available for access requests under
-https://zenodo.org/records/12587543
-
-Download a step-by-step guide
-+++++++++++++++
-:download:`Download <_files/ReadTheDocs_Tutorial.pdf>`
 
 Contact
 +++++++++++++++
