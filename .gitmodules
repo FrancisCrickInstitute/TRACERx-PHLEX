@@ -1,12 +1,12 @@
 [submodule "deep-imcyto"]
 	path = deep-imcyto
-	url = git@github.com/FrancisCrickInstitute/deep-imcyto.git
+	url = git@github.com:FrancisCrickInstitute/deep-imcyto.git
 	branch = main
 [submodule "Spatial-PHLEX"]
 	path = Spatial-PHLEX
-	url = git@github.com/FrancisCrickInstitute/Spatial-PHLEX.git
+	url = git@github.com:FrancisCrickInstitute/Spatial-PHLEX.git
 	branch = main
 [submodule "TYPEx"]
 	path = TYPEx
-	url = git@github.com/FrancisCrickInstitute/TYPEx.git
+	url = git@github.com:FrancisCrickInstitute/TYPEx.git
 	branch = master
