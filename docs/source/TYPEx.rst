@@ -27,13 +27,13 @@ Usage
         
         git clone git@github.com:FrancisCrickInstitute/TYPEx.git
 
-Running TYPEx on input generated with deep-imcyto in MCCS mode
+Running TYPEx on input generated with deep-imcyto in MCCS/CellProfiler mode
 --------------
 
 .. code-block:: bash
 
    nextflow run TRACERx-PHLEX/TYPEx/main.nf \
-        -c $PWD/TRACERx-PHLEX/TYPEx/test.config \
+        -c $PWD/TRACERx-PHLEX/TYPEx/testdata.config \
         --input_dir $PWD/results/deep-imcyto/$release/ \
         --sample_file $PWD/TRACERx-PHLEX/TYPEx/data/sample_file.tracerx.txt \
         --release $release \
@@ -42,7 +42,7 @@ Running TYPEx on input generated with deep-imcyto in MCCS mode
 	--color_config $PWD/TRACERx-PHLEX/TYPEx/conf/celltype_colors.json \
         --tissue_seg_model "$PWD/TRACERx-PHLEX/TYPEx/models/tumour_stroma_classifier.ilp" \
         --output_dir "$PWD/results/TYPEx/$release/" \
-        --deep_imcyto true --mccs true \
+        --deep_imcyto true --cellprofiler true \
         -profile singularity \
         -resume
 
@@ -61,7 +61,7 @@ Running TYPEx on input generated with deep-imcyto in simple segmentation mode
 	--color_config $PWD/TRACERx-PHLEX/TYPEx/conf/celltype_colors.json \
         --tissue_seg_model "$PWD/TRACERx-PHLEX/TYPEx/models/tumour_stroma_classifier.ilp" \
         --output_dir "$PWD/results/TYPEx/$release/" \
-        --deep_imcyto true --mccs false \
+        --deep_imcyto true --cellprofiler false \
         -profile singularity \
         -resume
 
@@ -73,7 +73,6 @@ Running TYPEx with user-provided cell objects tables (indpendently of deep-imcyt
 
    release=TYPEx_test
    nextflow run TYPEx/main.nf \
-   -c $PWD/TYPEx/test.config \
     -c TYPEx/testdata.config \
     --input_dir $PWD/results/ \
     --release $release \
@@ -82,8 +81,9 @@ Running TYPEx with user-provided cell objects tables (indpendently of deep-imcyt
     --params_config "$PWD/TYPEx/data/typing_params.json" \
     --annotation_config "$PWD/TYPEx/data/cell_type_annotation.testdata.json" \
     --color_config $PWD/TYPEx/conf/celltype_colors.json \
-    --output_dir "$PWD/results/TYPEx/$release/" \
     --tissue_seg_model "$PWD/TRACERx-PHLEX/TYPEx/models/tissue_classifier.ilp" \
+    --output_dir "$PWD/results/TYPEx/$release/" \
+    --deep_imcyto false \
     -profile singularity \
     -resume
 
@@ -142,7 +142,7 @@ Input Parameters
 Several input paramters can be used to define the typing workflow:
 
 - :bash:`deep-imcyto` run the TYPEx multi-tiered approach [default: true]
-- :bash:`mccs` run TYPEx on deep-imcyto in MCCS mode when true and simple segmentation mode when false [default: true]
+- :bash:`cellprofiler` run TYPEx on deep-imcyto in MCCS/CellProfiler mode when true and simple segmentation mode when false [default: true]
 
 - :bash:`tiered` run the TYPEx multi-tiered approach  [default: true]
 - :bash:`stratify_by_confidence` include the stratification by low and high confidence when true [default: true]
